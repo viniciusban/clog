@@ -27,7 +27,6 @@ function _main () {
 ##--------------------------------------------------
 
     rm -f ${TMPDIR}/_clog*
-    echo "${TITLE}" > ${TMPDIR}/_clog_title.txt
 
 
 ##--------------------------------------------------
@@ -50,8 +49,7 @@ $0 ~ /[cC]loses #/ {
         echo "** Warning: Check the generated changelog. You possibly closed the same ticket twice." >&2
     fi
 
-    echo "" > ${TMPDIR}/_clog_empty_line.txt
-    cat ${TMPDIR}/_clog_title.txt ${TMPDIR}/_clog_changelog.txt ${TMPDIR}/_clog_empty_line.txt
+    cat <(echo "$TITLE") ${TMPDIR}/_clog_changelog.txt <(echo "")
 }
 
 
