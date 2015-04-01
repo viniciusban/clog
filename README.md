@@ -43,6 +43,7 @@ Tips
 - Close only one ticket by line.
 - Write your closing ticket line as you want to see in CHANGELOG.
 - You can write your "close command" anywhere in your commit message and we use it.
+- Use tags.
 
 Collaborate
 -----------
