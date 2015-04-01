@@ -10,12 +10,14 @@ function _main () {
     FROM=$(git tag --sort=refname | tail -n 1)
     TO="HEAD"
     TITLE="since $FROM"
+    SHOW_WARNINGS=1
 
     while [ -n "$1" ]; do
         case "$1" in
             ( -f | --from ) FROM="$2"; shift ;;
             ( -t | --to ) TO="$2"; shift ;;
             ( -i | --title ) TITLE="$2"; shift ;;
+            ( -q | --quiet ) SHOW_WARNINGS=; shift ;;
             ( -h | --help ) _show_help; exit 0 ;;
             ( * ) echo "invalid option: $1"; exit 1 ;;
         esac
@@ -44,9 +46,11 @@ $0 ~ /[cC]loses #/ {
 }
 ' > ${TMPDIR}/_clog_changelog.txt
 
-    cat ${TMPDIR}/_clog_changelog.txt | awk '{print $2}' | sort -u > ${TMPDIR}/_clog_unique_tickets.txt
-    if [ "$(wc -l ${TMPDIR}/_clog_changelog.txt | awk '{print $1}')" != "$(wc -l ${TMPDIR}/_clog_unique_tickets.txt | awk '{print $1}')" ]; then
-        echo "** Warning: Check the generated changelog. You possibly closed the same ticket twice." >&2
+    if [ -n "$SHOW_WARNINGS" ]; then
+        cat ${TMPDIR}/_clog_changelog.txt | awk '{print $2}' | sort -u > ${TMPDIR}/_clog_unique_tickets.txt
+        if [ "$(wc -l ${TMPDIR}/_clog_changelog.txt | awk '{print $1}')" != "$(wc -l ${TMPDIR}/_clog_unique_tickets.txt | awk '{print $1}')" ]; then
+            echo "** Warning: Check the generated changelog. You possibly closed the same ticket twice." >&2
+        fi
     fi
 
     cat <(echo "$TITLE") ${TMPDIR}/_clog_changelog.txt <(echo "")
@@ -70,6 +74,9 @@ Options:
 
     -i | --title  <text>
         Puts <text> as title.
+
+    -q | --quiet
+        Don't show warning messages.
 "
 }
 
