@@ -88,7 +88,7 @@ Tips
 - Close only one ticket by line.
 - But you can close many tickets in one line if they solve the same problem. Just use the "closes #23, #25: <message>" pattern.
 - Write your closing ticket line as you want to see in CHANGELOG.
-- You can write your "close command" anywhere in your commit message and we use it.
+- You can write your "close command" anywhere in your commit message and we use it. But it cannot span multiple lines.
 - Use tags to identify your versions.
 
 
