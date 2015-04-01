@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Generate a changelog based on git history.
 
