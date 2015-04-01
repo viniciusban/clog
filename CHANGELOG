@@ -1,0 +1,5 @@
+v0.1
+  - #3: run on bash. (bbb786e by viniciusban)
+  - #4: use process substitution instead of temp files. (be5b963 by viniciusban)
+  - #5: create options to run in quiet mode. (3b605c2 by viniciusban)
+
