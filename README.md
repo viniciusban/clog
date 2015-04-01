@@ -35,14 +35,14 @@ Differences
 -----------
 
 - Simple and plain git, bash and awk. No external dependencies.
-- Simpler commit message standard. We just for "closes #" string.
+- Simpler commit message pattern. We just look for "closes #" string. No type, no changed module.
 
 Tips
 ----
 
 - Close only one ticket by line.
-- Write your closing ticket line as you want to see in changelog.
-- You can write your "close command" anywhere in your commit message.
+- Write your closing ticket line as you want to see in CHANGELOG.
+- You can write your "close command" anywhere in your commit message and we use it.
 
 Collaborate
 -----------
