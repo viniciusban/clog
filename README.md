@@ -18,34 +18,87 @@ You can type `--from` and `--to` arguments. Ask for help:
 $ clog.sh --help
 ```
 
-To update your CHANGELOG file:
+Why?
+----
+
+Due to several factors. See some:
+
+1. Maintain a CHANGELOG file is a boring task.
+1. I was looking for something useful to do with git history, beyond `git blame`.
+1. I needed a motivation to write better, shorter and useful commit messages.
+1. Don't repeat myself. If I wrote once (on commit message), I should not write it again (on CHANGELOG file).
+1. The git history is sacred. It should never be modified. So, it's reliable.
+
+I got inspiration on [clog - A conventional changelog generator for the rest of us](http://blog.thoughtram.io/announcements/tools/2014/09/18/announcing-clog-a-conventional-changelog-generator-for-the-rest-of-us.html), by thoughtram guys, but made something different:
+
+- Simple and plain git and bash. No external dependencies.
+- Unix pipe oriented. Or, outputs to stdout.
+- Simpler commit message pattern. We just look for `[cC]loses #` pattern. No type, no changed module name, no formatting or grouping of messages.
+
+
+How to use it?
+--------------
+
+When you close a ticket, write your commit message like this:
+
+```
+Bugfix #17 FTW! No more annoying messages on control panel.
+
+It closes #17: remove wrong annoying message from control panel, asking for confirmation.
+
+It was caused by... blah blah blah...
+
+More blah blah blah...
+```
+
+Now, you go to terminal and:
+
+```
+$ clog --title v1.6.1
+v1.6.1
+  - #17: remove wrong annoying message from control panel, asking for confirmation. (c67632b by john.doe)
+```
+
+It's that simple. What you wrote on your "close ticket command" will be written to your commit message, appended with the commit SHA1 and the committer's email part before the "@" sign.
+
+
+How do I update my CHANGELOG file?
+----------------------------------
+
+Simply go to your terminal and:
 
 ```
 $ clog.sh --title v1.5 | cat - CHANGELOG > CHANGELOG
 ```
 
+In addition, to commit, generate a new annotated tag and push to origin:
 
-Why?
-----
+```
+$ git commit -a CHANGELOG -m 'Update CHANGELOG for v1.5'
+$ git tag -a v2.5 -m 'v1.5'
+$ git push --tag origin <branch_name>
+```
 
-See the motivation: [clog - A conventional changelog generator for the rest of us](http://blog.thoughtram.io/announcements/tools/2014/09/18/announcing-clog-a-conventional-changelog-generator-for-the-rest-of-us.html).
+If I were you: I'd put that in a bash function. ;-)
 
-
-Differences
------------
-
-- Simple and plain git, bash and awk. No external dependencies.
-- Simpler commit message pattern. We just look for "closes #" string. No type, no changed module.
 
 Tips
 ----
 
 - Close only one ticket by line.
+- But you can close many tickets in one line if they solve the same problem. Just use the "closes #23, #25: <message>" pattern.
 - Write your closing ticket line as you want to see in CHANGELOG.
 - You can write your "close command" anywhere in your commit message and we use it.
-- Use tags.
+- Use tags to identify your versions.
+
 
 Collaborate
 -----------
 
-You are welcome. Fork and send a pull request.
+Fork and send a pull request. You are welcome.
+
+
+LICENSE
+-------
+
+We use the MIT one. Se `LICENSE` file.
