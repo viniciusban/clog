@@ -61,6 +61,8 @@ v1.6.1
 
 It's that simple. What you wrote on your "close ticket command" will be written to your commit message, appended with the commit SHA1 and the committer's email part before the "@" sign.
 
+By default we start searching your git history for "close commands" from the last (in dictionary order) tag.
+
 
 How do I update my CHANGELOG file?
 ----------------------------------
