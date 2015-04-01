@@ -54,7 +54,7 @@ More blah blah blah...
 Now, you go to terminal and:
 
 ```
-$ clog --title v1.6.1
+$ clog.sh --title v1.6.1
 v1.6.1
   - #17: remove wrong annoying message from control panel, asking for confirmation. (c67632b by john.doe)
 ```
@@ -75,7 +75,7 @@ In addition, to commit, generate a new annotated tag and push to origin:
 
 ```
 $ git commit -a CHANGELOG -m 'Update CHANGELOG for v1.5'
-$ git tag -a v2.5 -m 'v1.5'
+$ git tag -a v1.5 -m 'v1.5'
 $ git push --tag origin <branch_name>
 ```
 
