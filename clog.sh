@@ -37,6 +37,7 @@ function _main () {
 
     git log --reverse --grep='[cC]lose[s]\? #[0-9]'  --grep='[rR]esolve[s]\? #[0-9]' ${FROM}..${TO} | awk '\
 function get_after_matched () {
+# simulate non-greedy regex because sub() patterns are greedy.
     return substr(line, RSTART+RLENGTH-2);
 }
 
@@ -56,7 +57,6 @@ $1 == "Author:" {
     line = $0;
 }
 
-# uses match() to simulate non-greedy regex.
 match(line, pattern_closes) { line = get_after_matched(); }
 match(line, pattern_resolves) { line = get_after_matched(); }
 
