@@ -53,9 +53,7 @@ $1 == "Author:" {
     sub(/@.*/, "", author);
 }
 
-{
-    line = $0;
-}
+{ line = $0; }
 
 match(line, pattern_closes) { line = get_after_matched(); }
 match(line, pattern_resolves) { line = get_after_matched(); }
