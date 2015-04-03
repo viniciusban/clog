@@ -35,12 +35,13 @@ function _main () {
 ## showtime!
 ##--------------------------------------------------
 
-    git log --reverse --grep='[cC]loses #' ${FROM}..${TO} | awk '\
+    git log --reverse --grep='[cC]lose[s]\? #[0-9]' ${FROM}..${TO} | awk '\
 $1 == "commit" { sha1=$2 }
 $1 == "Author:" { author=$NF }
-$0 ~ /[cC]loses #/ {
-    line=$0
-    sub(/^.*[cC]loses #/, "#", line)
+$0 ~ /[cC]lose[s]? #[0-9]/ {
+# uses match() to simulate non-greedy regex.
+    match($0, "[cC]lose[s]? #[0-9]")
+    line = substr($0, RSTART+RLENGTH-2);
     sub(/@.*/, "", author)
     printf("  - %s (%s by %s)\n", line, substr(sha1,1,7), substr(author,2))
 }
