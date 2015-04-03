@@ -70,7 +70,7 @@ How do I update my CHANGELOG file?
 Simply go to your terminal and:
 
 ```
-$ clog.sh --title v1.5 | cat - CHANGELOG > CHANGELOG
+$ echo "$(clog --title v1.5 | cat - CHANGELOG)" > CHANGELOG
 ```
 
 In addition, to commit, generate a new annotated tag and push to origin:
