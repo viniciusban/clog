@@ -47,8 +47,10 @@ $0 ~ /[cC]loses #/ {
 ' > ${TMPDIR}/_clog_changelog.txt
 
     if [ -n "$SHOW_WARNINGS" ]; then
-        cat ${TMPDIR}/_clog_changelog.txt | awk '{print $2}' | sort -u > ${TMPDIR}/_clog_unique_tickets.txt
-        if [ "$(wc -l ${TMPDIR}/_clog_changelog.txt | awk '{print $1}')" != "$(wc -l ${TMPDIR}/_clog_unique_tickets.txt | awk '{print $1}')" ]; then
+        grep -o -e '#[0-9]\+' ${TMPDIR}/_clog_changelog.txt > ${TMPDIR}/_clog_tickets.txt
+        HOWMANY_TICKETS=$(wc -l ${TMPDIR}/_clog_tickets.txt | awk '{print $1}')
+        HOWMANY_UNIQUE_TICKETS=$(sort -u ${TMPDIR}/_clog_tickets.txt | wc -l | awk '{print $1}')
+        if [ "${HOWMANY_TICKETS}" != "${HOWMANY_UNIQUE_TICKETS}" ]; then
             echo "** Warning: Check the generated changelog. You possibly closed the same ticket twice." >&2
         fi
     fi
