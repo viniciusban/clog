@@ -36,6 +36,10 @@ function _main () {
 ##--------------------------------------------------
 
     git log --reverse --grep='[cC]lose[s]\? #[0-9]'  --grep='[rR]esolve[s]\? #[0-9]' ${FROM}..${TO} | awk '\
+function get_after_matched () {
+    return substr(line, RSTART+RLENGTH-2);
+}
+
 BEGIN {
     pattern_closes   = "[cC]lose[s]? #[0-9]";
     pattern_resolves = "[rR]esolve[s]? #[0-9]";
@@ -47,11 +51,16 @@ $1 == "Author:" {
     sub(/@.*/, "", author);
 }
 
-$0 ~ /[cC]lose[s]? #[0-9]/ {
+{
+    line = $0;
+}
+
 # uses match() to simulate non-greedy regex.
-    match($0, "[cC]lose[s]? #[0-9]")
-    line = substr($0, RSTART+RLENGTH-2);
-    printf("  - %s (%s by %s)\n", line, substr(sha1,1,7), substr(author,2))
+match(line, pattern_closes) { line = get_after_matched(); }
+match(line, pattern_resolves) { line = get_after_matched(); }
+
+line != $0 {
+    printf("  - %s (%s by %s)\n", line, substr(sha1,1,7), substr(author,2));
 }
 ' > ${TMPDIR}/_clog_changelog.txt
 
