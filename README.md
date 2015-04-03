@@ -1,7 +1,7 @@
 clog.sh
 =======
 
-Generate CHANGELOG from your git history.
+Generate CHANGELOG from your git history based on "close commands".
 
 ```
 $ cd ~/projects/my_repo
@@ -59,7 +59,7 @@ v1.6.1
   - #17: remove wrong annoying message from control panel, asking for confirmation. (c67632b by john.doe)
 ```
 
-It's that simple. What you wrote on your "close ticket command" will be written to your commit message, appended with the commit SHA1 and the committer's email part before the "@" sign.
+It's that simple. What you wrote on your "close command" will be written to your commit message, appended with the commit SHA1 and the committer's email part before the "@" sign.
 
 By default we start searching your git history for "close commands" from the last (in dictionary order) tag.
 
@@ -82,6 +82,18 @@ $ git push --tag origin <branch_name>
 ```
 
 If I were you: I'd put that in a bash function. ;-)
+
+
+What are "close commands"?
+--------------------------
+
+They are predefined text patterns to say their repository hosting must close a ticket. You probably already use this facility.
+
+The pattern is "<word> #123", where:
+ - <word> must be: close, closed, closes, fix, fixes, fixed, resolve, resolves, resolved.
+ - #123 is the ticket number. The "#" character must be present.
+
+Now you can use them to generate a CHANGELOG.
 
 
 Tips
