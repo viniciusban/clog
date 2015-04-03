@@ -44,7 +44,8 @@ BEGIN {
     pattern_closes   = "[cC]lose[s]? #[0-9]";
     pattern_resolves = "[rR]esolve[s]? #[0-9]";
 }
-$1 == "commit" { sha1=$2 }
+
+$1 == "commit" { sha1=$2; }
 
 $1 == "Author:" {
     author=$NF;
