@@ -1,3 +1,7 @@
+v0.2.1
+  - #11: Explain about "close commands". (485b0ad by viniciusban)
+  - #12: Unify all "close command" patterns. (42b1d43 by viniciusban)
+
 v0.2
   - #8: Report duplicates, when more than one ticket is closed on the same line. (a1abcc6 by viniciusban)
   - #1: Recognize "close #" too. (415056a by viniciusban)
