@@ -7,6 +7,10 @@
 ##--------------------------------------------------
 
 function _main () {
+    if [ -z "$TMPDIR" ]; then
+        TMPDIR=/tmp
+    fi
+
     FROM=$(git tag --sort=refname | tail -n 1)
     TO="HEAD"
     TITLE="since $FROM"
