@@ -76,7 +76,7 @@ line != $0 {
         fi
     fi
 
-    cat <(echo "$TITLE") ${TMPDIR}/_clog_changelog.txt <(echo "")
+    cat <(echo "$TITLE") <(grep -v '^$' ${TMPDIR}/_clog_changelog.txt) <(echo "")
 }
 
 
