@@ -47,7 +47,7 @@ function get_after_matched () {
 
 BEGIN {
     all_patterns    = "([cC]lose[sd]?|[fF]ix(e[sd]?)?|[rR]esolve[sd]?) #[0-9]"
-    rnotes_pattern  = ".*<release-notes>.*"
+    rnotes_pattern  = "^ *<release-notes>$"
 }
 
 $1 == "commit" { sha1=$2; }
