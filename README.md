@@ -64,6 +64,31 @@ It's that simple. What you wrote on your "close command" will be written to your
 By default we start searching your git history for "close commands" from the last (in dictionary order) tag.
 
 
+About release notes
+-------------------
+
+In the quest for really useful commit messages, you can also add some release notes instructions on it:
+
+```
+Create the Employee data structure...
+
+Closes #456: Create table to store Employee data.
+
+<release-notes>
+- run in shell: $ python manage.py migrate my_app 0005_add_employee_table
+- run in shell: $ python manage.py migrate my_app 0006_add_employee_contacts_table
+- run in shell: $ convert_old_structure_to_new.sh
+</release-notes>
+
+```
+
+If you have release notes instructions (the string `<release-notes>` alone in a line) in your commit messages, `clog.sh` will add a "\*rnotes\*" string at the line ending:
+
+```
+v1.6.1
+- #456: Create table to store Employee data. (e37620a by mrs.smith) *rnotes*
+```
+
 How do I update my CHANGELOG file?
 ----------------------------------
 
