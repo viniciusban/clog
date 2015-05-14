@@ -63,7 +63,7 @@ match(line, all_patterns) { line = get_after_matched(); }
 match(line, rnotes_pattern) { printf(" *rnotes*"); }
 
 line != $0 {
-    printf("  - %s (%s by %s)\n", line, substr(sha1,1,7), substr(author,2));
+    printf("\n  - %s (%s by %s)", line, substr(sha1,1,7), substr(author,2));
 }
 ' > ${TMPDIR}/_clog_changelog.txt
 
