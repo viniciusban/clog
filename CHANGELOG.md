@@ -1,3 +1,7 @@
+v0.3
+  - #13: Point out if commit has <release-notes> instructions. (8cf7e60 by viniciusban)
+  - #14: Avoid `<release-notes>` if there's anything more in a line. (e634358 by viniciusban)
+
 v0.2.1
   - #11: Explain about "close commands". (485b0ad by viniciusban)
   - #12: Unify all "close command" patterns. (42b1d43 by viniciusban)
