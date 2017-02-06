@@ -11,7 +11,11 @@ function _main () {
         TMPDIR=/tmp
     fi
 
-    FROM=$(git tag --sort=refname | tail -n 1)
+    FROM=$(git tag --sort=refname | tail -n 1) # get last tag
+    if test -z "$FROM"
+    then
+        FROM=$(git log --oneline --reverse --format=format:%h | head -n 1) # get 1st commit
+    fi
     TO="HEAD"
     TITLE="since $FROM"
     SHOW_WARNINGS=1
