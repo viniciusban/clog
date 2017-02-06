@@ -19,7 +19,7 @@ function _main () {
         FROM_TO_DISPLAY="1st commit ($FROM)"
     fi
     TO="HEAD"
-    TITLE="since $FROM_TO_DISPLAY"
+    TITLE=
     SHOW_WARNINGS=1
 
     for P in "$@"
@@ -32,7 +32,7 @@ function _main () {
             ( -h | --help ) _show_help; exit 0 ;;
             ( * )
                 case "$I" in
-                    ( FROM ) FROM="$P";;
+                    ( FROM ) FROM="$P";FROM_TO_DISPLAY="$FROM";;
                     ( TO ) TO="$P";;
                     ( TITLE ) TITLE="$P";;
                     ( SHOW_WARNINGS ) SHOW_WARNINGS="$P";;
@@ -41,6 +41,11 @@ function _main () {
                 I=''
         esac
     done
+
+    if test -z "$TITLE"
+    then
+        TITLE="since $FROM_TO_DISPLAY"
+    fi
 
 ##--------------------------------------------------
 ## prepare for running
