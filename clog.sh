@@ -12,12 +12,14 @@ function _main () {
     fi
 
     FROM=$(git tag --sort=refname | tail -n 1) # get last tag
+    FROM_TO_DISPLAY=$FROM
     if test -z "$FROM"
     then
         FROM=$(git log --oneline --reverse --format=format:%h | head -n 1) # get 1st commit
+        FROM_TO_DISPLAY="1st commit ($FROM)"
     fi
     TO="HEAD"
-    TITLE="since $FROM"
+    TITLE="since $FROM_TO_DISPLAY"
     SHOW_WARNINGS=1
 
     while [ -n "$1" ]; do
