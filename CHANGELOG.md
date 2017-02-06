@@ -1,3 +1,7 @@
+v0.4
+  - #16: start searching for close commands from 1st commit when no tags found
+    (470563a by viniciusban)
+
 v0.3
   - #13: Point out if commit has <release-notes> instructions. (8cf7e60 by viniciusban)
   - #14: Avoid `<release-notes>` if there's anything more in a line. (e634358 by viniciusban)
