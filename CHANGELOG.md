@@ -1,3 +1,7 @@
+v0.5
+  - #17: accept arguments with multiple words (603322a by viniciusban)
+  - #18: show title based in --from when it is informed (2174e2c by viniciusban)
+
 v0.4
   - #16: start searching for close commands from 1st commit when no tags found
     (470563a by viniciusban)
