@@ -22,16 +22,24 @@ function _main () {
     TITLE="since $FROM_TO_DISPLAY"
     SHOW_WARNINGS=1
 
-    while [ -n "$1" ]; do
-        case "$1" in
-            ( -f | --from ) FROM="$2"; shift ;;
-            ( -t | --to ) TO="$2"; shift ;;
-            ( -i | --title ) TITLE="$2"; shift ;;
-            ( -q | --quiet ) SHOW_WARNINGS=; shift ;;
+    for P in "$@"
+    do
+        case "$P" in
+            ( -f | --from ) I='FROM';;
+            ( -t | --to ) I='TO';;
+            ( -i | --title ) I='TITLE';;
+            ( -q | --quiet ) I='SHOW_WARNINGS';;
             ( -h | --help ) _show_help; exit 0 ;;
-            ( * ) echo "invalid option: $1"; exit 1 ;;
+            ( * )
+                case "$I" in
+                    ( FROM ) FROM="$P";;
+                    ( TO ) TO="$P";;
+                    ( TITLE ) TITLE="$P";;
+                    ( SHOW_WARNINGS ) SHOW_WARNINGS="$P";;
+                    ( * ) echo "invalid option: $P"; exit 1 ;;
+                esac
+                I=''
         esac
-        shift
     done
 
 ##--------------------------------------------------
@@ -110,4 +118,4 @@ Options:
 }
 
 
-_main $@
+_main "$@"
